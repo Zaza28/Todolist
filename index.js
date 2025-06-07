@@ -8,7 +8,6 @@
 //1.
 let form = document.querySelector("form");
 let input = document.querySelector("input");
-let listContainer = document.getElementById("list-container");
 let list = document.getElementById("list-container");
 
 form.addEventListener("submit", function (event) {
@@ -19,11 +18,11 @@ form.addEventListener("submit", function (event) {
   newList.textContent = data;
   list.appendChild(newList);
   newList.classList.add("list");
-
   input.value = "";
-
+  saveTodos();
   newList.addEventListener("click", () => {
     newList.remove();
+    saveTodos();
   });
 });
 
@@ -31,3 +30,11 @@ form.addEventListener("submit", function (event) {
 // 4. Stocker dans le localStorage la liste :
 // 5. Consulter le localStorage au lancement de l'app pour
 //rajouter les todos :
+function saveTodos() {
+  localStorage.setItem("todos", list.innerHTML);
+}
+
+function getTodos() {
+  list.innerHTML = localStorage.getItem("todos");
+}
+getTodos();
