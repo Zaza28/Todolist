@@ -10,7 +10,7 @@ let form = document.querySelector("form");
 let input = document.querySelector("input");
 let list = document.getElementById("list-container");
 getTodos();
-form.addEventListener("submit", function (event) {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const data = input.value;
@@ -48,3 +48,24 @@ function getTodos() {
     }
   }
 }
+
+//correction :
+// function storeList() {
+//   window.localStorage.todolist = list.innerHTML;
+// }
+// function getTodos() {
+//   list.innerHTML = window.localStorage.todolist;
+// }
+// getTodos();
+// form.addEventListener("click", (e) => {
+//   e.preventDefault();
+
+//   list.innerHTML += `<li>${item.value}`;
+//   item.value;
+//   storeList();
+// });
+
+// list.addEventListener("click", (e) => {
+//   e.target.remove();
+//   storeList();
+// });
