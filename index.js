@@ -9,21 +9,22 @@
 let form = document.querySelector("form");
 let input = document.querySelector("input");
 let list = document.getElementById("list-container");
-
+getTodos();
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const data = input.value;
   const newList = document.createElement("li");
   newList.textContent = data;
-  list.appendChild(newList);
   newList.classList.add("list");
-  input.value = "";
-  saveTodos();
+
   newList.addEventListener("click", () => {
     newList.remove();
     saveTodos();
   });
+  list.appendChild(newList);
+  input.value = "";
+  saveTodos();
 });
 
 //Etape 2 : le stockage des données :
@@ -35,6 +36,15 @@ function saveTodos() {
 }
 
 function getTodos() {
-  list.innerHTML = localStorage.getItem("todos");
+  const savedTodos = localStorage.getItem("todos");
+  if (savedTodos) {
+    list.innerHTML = savedTodos;
+    const items = list.getElementsByClassName("list");
+    for (let item of items) {
+      item.onclick = function () {
+        this.remove();
+        saveTodos();
+      };
+    }
+  }
 }
-getTodos();
